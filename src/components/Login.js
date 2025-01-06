@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
 
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,20 +13,14 @@ const Login = () => {
 
   const loginUser = async (username, password) => {
     try {
-      const response = await fetch('http://localhost/my_codeigniter/public/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-      console.log(data);
+        console.log('Sending login request with data:', { username, password });
+        const response = await axios.post('http://localhost:8080/api/login', { username, password });
+        console.log('Response Data:', response.data);
     } catch (error) {
-      console.error('Login error:', error);
+        console.error('Login error:', error);
     }
-  };
+};
+
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 border border-gray-300 rounded-lg bg-white">
